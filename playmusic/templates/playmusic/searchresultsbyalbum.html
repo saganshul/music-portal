@@ -1,0 +1,56 @@
+{% load staticfiles %}
+{% load playmusictags %}
+<script src="{% static 'playmusic3/js/jquery.min.js' %}"></script>
+<script src="{% static 'playmusic/js/myjqueryfunc.js' %}"></script>
+<br><br>
+<div class="resultbox">
+	<div class="row">
+		<div class="col-md-2">
+			<h4 style="color:grey">{{ no_of_results }} results</h4>
+		</div>
+		<div class="col-md-5 col-md-offset-5">
+			<span class="searchnav" id="searchbysong">Songs</span>
+			<span class="searchnav" id="searchbuttonbyartist">Artist</span>
+			<span class="searchnavactive" id="searchbuttonbyalbum">Album</span>
+			<span class="searchnav" id="searchbuttonbygenre">Genre</span>
+		</div>
+
+	</div>
+	<hr><br>
+	{% for item in results %}
+		<div class="resultedsongs">
+				<div class="row">
+					<div class="col-md-1">
+						<img class="searchimage" id="play{{item.id}}" data-catid="{{item.id}}" data-title="{{item.file.url}}" src="{% static 'playmusic/img/tcdimage.jpg' %}" alt="Playhere image" height=60 width=65>
+					</div>
+					<div class="col-md-7">
+						<h4 class="songname">{{ item.file.name|replacetag:"_"|slice:"6:" }}</a><br><small>{{ item.artist }}</small><br><small>{{ item.album }}</small></h4>
+					</div>
+					<div class="col-md-2">
+						<span>
+							<div class="btn-group">
+								<button type="button" class="btn btn-white"><i class="fa fa-circle-o-notch"></i></button>
+								<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+								   	<li class="queuejquery" id="queue{{item.id}}" data-catid="{{item.id}}"><i class="fa fa-angle-double-right"></i> Add to Queue</li>
+									<li><a href="#"><i class="fa fa-hand-o-down"></i> Add to myplaylist</a></li>
+									<li><a href="#"><i class="fa fa-star"></i> Add to Favriotes</a></li>
+									<li class="divider"></li>
+									<li><a href="#"><i class="fa fa-paper-plane"></i> Recommend to a friend</a></li>
+								</ul>
+							</div>
+						</span>
+					</div>
+					<div class="col-md-2">
+						<div class="tagbox">
+							#{{ item.tag }}
+						</div>
+					</div>
+				</div>
+		</div>
+		<hr>
+	{% endfor %}
+</div>

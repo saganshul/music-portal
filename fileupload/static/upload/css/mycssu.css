@@ -1,0 +1,51 @@
+gos.myheading{
+	font-size:60px;
+}
+.myicon{
+	font-size:80px;
+}
+.playtext{
+	text-transform: uppercase;
+	font-size:18px;
+	
+}
+.baselogo{
+	font-size:23px;
+	margin-right:10px;
+	padding-left:25px;
+}
+.loginback{
+	padding-bottom:50px;
+	margin-bottom:50px;
+	font-family: 'Open Sans', sans-serif;
+	background: #E7EAEC;
+}
+.playhere{
+	font-size:20px;
+	color:white;
+	text-decoration:none;
+	
+}
+.playhere:hover{
+	font-weight:800;
+	color:white;
+	text-decoration:none;
+}
+.uploadbox{
+	width:100%;
+	background-color:white;
+	margin-left:0px;
+	padding-top:20%;
+	padding-bottom:20%;
+}
+.uploadtext{
+	color:#2C3E50;
+	text-align:center;
+}
+.uploadimage{
+	padding-left:10%;
+}
+
+
+
+

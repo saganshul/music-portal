@@ -1,0 +1,4 @@
+sudo pip install django-filer
+mutagen
+PIL
+

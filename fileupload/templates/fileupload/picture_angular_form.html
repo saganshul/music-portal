@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PlayHere</title>
+	{% load staticfiles %}
+    <!-- PACE LOAD BAR PLUGIN - This creates the subtle load bar effect at the top of the page. -->
+    <link href="{% static 'playmusic3/css/plugins/pace/pace.css' %}" rel="stylesheet">
+    <script src="{% static 'playmusic3/js/plugins/pace/pace.js' %}"></script>
+	<link href="{% static 'upload/css/mycssu.css' %}" rel="stylesheet">
+    <!-- GLOBAL STYLES - Include these on every page. -->
+    <link href="{% static 'playmusic3/css/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel="stylesheet" type="text/css">
+    <link href="{% static 'playmusic3/icons/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+	<link href="{% static 'playmusic/font-awesome/css/font-awesome.css' %}" rel="stylesheet" type="text/css">
+    <!-- PAGE LEVEL PLUGIN STYLES -->
+
+
+    <!-- THEME STYLES - Include these on every page. -->
+    <link href="{% static 'playmusic3/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'playmusic3/css/plugins.css' %}" rel="stylesheet">
+
+    <!-- THEME DEMO STYLES - Use these styles for reference if needed. Otherwise they can be deleted. -->
+    <link href="{% static 'playmusic3/css/demo.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- begin TOP NAVIGATION -->
+        <nav class="navbar-top" role="navigation">
+
+            <!-- begin BRAND HEADING -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <i class="fa fa-bars"></i> Menu
+                </button>
+                <div class="navbar-brand">
+                    <a class="playhere" href="/playmusic/loggedin/">
+                         <span class="baselogo"><i class="fa fa-play-circle"></i></span>Play<strong>Here</strong></a>
+                    </a>
+                </div>
+            </div>
+            <!-- end BRAND HEADING -->
+
+            <div class="nav-top">
+
+                <!-- begin LEFT SIDE WIDGETS -->
+                <ul class="nav navbar-left">
+                    <li class="tooltip-sidebar-toggle">
+                        <a href="#" id="sidebar-toggle" data-toggle="tooltip" data-placement="right" title="Sidebar Toggle">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>
+                    <!-- You may add more widgets here using <li> -->
+                </ul>
+
+                <ul class="nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-user"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="{% url 'profile' user.id %}">
+                                    <i class="fa fa-user"></i> My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="logout_open" href="#logout">
+                                    <i class="fa fa-sign-out"></i> Logout
+                                    <strong>{{ user.username }}</strong>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-menu -->
+                    </li>
+                    <!-- /.dropdown -->
+                    <!-- end USER ACTIONS DROPDOWN -->
+
+                </ul>
+                <!-- /.nav -->
+                <!-- end MESSAGES/ALERTS/TASKS/USER ACTIONS DROPDOWNS -->
+
+            </div>
+            <!-- /.nav-top -->
+        </nav>
+        <!-- /.navbar-top -->
+        <!-- end TOP NAVIGATION -->
+
+        <!-- begin SIDE NAVIGATION -->
+        <nav class="navbar-side" role="navigation">
+            <div class="navbar-collapse sidebar-collapse collapse">
+                <ul id="side" class="nav navbar-nav side-nav">
+                    <!-- begin SIDE NAV USER PANEL -->
+                    <li class="side-user hidden-xs">
+                        <img class="img-circle" src="{% static 'playmusic3/img/profile-pic.jpg' %}" alt="">
+                        <p class="welcome">
+                            <i class="fa fa-key"></i> Logged in as
+                        </p>
+                        <p class="name tooltip-sidebar-logout">
+                            {{ user.first_name }}
+                            <span class="last-name">{{ user.last_name }} </span> <a style="color: inherit" class="logout_open" href="#logout" data-toggle="tooltip" data-placement="top" title="Logout"><i class="fa fa-sign-out"></i></a>
+                        </p>
+                        <div class="clearfix"></div>
+                    </li>
+                    <!-- end SIDE NAV USER PANEL -->
+                    <!-- begin SIDE NAV SEARCH -->
+                    <li class="nav-search">
+                        <form role="form">
+                            <input type="search" class="form-control" placeholder="Search...">
+                            <button class="btn">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
+                    <!-- end SIDE NAV SEARCH -->
+                    <!-- begin DASHBOARD LINK -->
+                    <li>
+                        <a class="active" href="index.html">
+                            <i class="fa fa-dashboard"></i> Dashboard
+                        </a>
+                    </li>
+                    <!-- end DASHBOARD LINK -->
+                    <!-- begin CHARTS DROPDOWN -->
+                    <li class="panel">
+                        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#charts">
+                            <i class="fa fa-bar-chart-o"></i> Friends <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="collapse nav" id="charts">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-angle-double-right"></i> Follwed friends
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="panel">
+                        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#forms">
+                            <i class="fa fa-edit"></i>Statics of songs<i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="collapse nav" id="forms">
+                            <li>
+                                <a href="basic-form-elements.html">
+                                    <i class="fa fa-angle-double-right"></i> Liked
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+        <div id="page-wrapper">
+			<div class="page-content">
+					<br><br>
+
+				<br><br>
+				<div class="row">
+					<div class="col-lg-9">
+						<div class="uploadbox">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-4 col-md-offset-3">
+											<span class="uploadimage"><input type="image" src="{% static 'playmusic/img/anshul.svg' %}" width=100 height=100/></span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 col-md-offset-2">
+											<h3 class="uploadtext">Click or Drag and Drop to upload Your Music</h3>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					
+				<br><br>
+
+				<form id="fileupload" action="." method="POST" enctype="multipart/form-data" data-ng-app="demo" data-ng-controller="DemoFileUploadController" data-file-upload="options" data-ng-class="{'fileupload-processing': processing() || loadingFiles}"> {% csrf_token %}
+						<!-- Redirect browsers with JavaScript disabled to the origin page -->
+						<noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>
+						<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+						<div class="row fileupload-buttonbar">
+							<div class="col-lg-7">
+								<!-- The fileinput-button span is used to style the file input field as button -->
+
+								 <input type="file" name="file" id="my_file" style="display: none;" multiple>
+								<button type="button" class="btn btn-primary start" data-ng-click="submit()">
+									<i class="glyphicon glyphicon-upload"></i>
+									<span>Start upload</span>
+								</button>
+								<button type="button" class="btn btn-warning cancel" data-ng-click="cancel()">
+									<i class="glyphicon glyphicon-ban-circle"></i>
+									<span>Cancel upload</span>
+								</button>
+								<!-- The loading indicator is shown during file processing -->
+								<div class="fileupload-loading"></div>
+							</div>
+							<!-- The global progress information -->
+							<div class="col-lg-5 fade" data-ng-class="{in: active()}">
+								<!-- The global progress bar -->
+								<div class="progress progress-striped active" data-file-upload-progress="progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
+								<!-- The extended global progress information -->
+								<div class="progress-extended">&nbsp;</div>
+							</div>
+						</div>
+						{% verbatim %}
+						<!-- The table listing the files available for upload/download-->
+						<table class="table table-striped files ng-cloak">
+							<tr data-ng-repeat="file in queue">
+								<td>
+									<p class="name" data-ng-switch data-on="!!file.url">
+										<span data-ng-switch-when="true" data-ng-switch data-on="!!file.thumbnailUrl">
+											<a data-ng-switch-when="true" data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}" data-gallery>{{file.name}}</a>
+											<a data-ng-switch-default data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}">{{file.name}}</a>
+										</span>
+										<span data-ng-switch-default>{{file.name}}</span>
+									</p>
+									<div data-ng-show="file.error"><span class="label label-important">Error</span> {{file.error}}</div>
+								</td>
+								<td>
+									<p class="size">{{file.size | formatFileSize}}</p>
+									<div class="progress progress-striped active fade" data-ng-class="{pending: 'in'}[file.$state()]" data-file-upload-progress="file.$progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
+								</td>
+								<td>
+									<button type="button" class="btn btn-primary start" data-ng-click="file.$submit()" data-ng-hide="!file.$submit">
+										<i class="glyphicon glyphicon-upload"></i>
+										<span>Start</span>
+									</button>
+									<button type="button" class="btn btn-warning cancel" data-ng-click="file.$cancel()" data-ng-hide="!file.$cancel">
+										<i class="glyphicon glyphicon-ban-circle"></i>
+										<span>Cancel</span>
+									</button>
+
+								</td>
+							</tr>
+						</table>
+						{% endverbatim %}
+					</form>
+
+
+			</div>
+		</div>
+	</div>
+    <!-- /#wrapper -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+		<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+		<script src="{% static 'upload/js/vendor/jquery.ui.widget.js' %}"></script>
+		<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+		<script src="{% static 'upload/js/load-image.min.js' %}"></script>
+		<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+		<script src="{% static 'upload/js/canvas-to-blob.min.js' %}"></script>
+		<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		<!-- blueimp Gallery script -->
+		<script src="{% static 'upload/js/jquery.blueimp-gallery.min.js' %}"></script>
+		<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+		<script src="{% static 'upload/js/jquery.iframe-transport.js' %}"></script>
+		<!-- The basic File Upload plugin -->
+		<script src="{% static 'upload/js/jquery.fileupload.js' %}"></script>
+		<!-- The File Upload processing plugin -->
+		<script src="{% static 'upload/js/jquery.fileupload-process.js' %}"></script>
+		<!-- The File Upload image preview & resize plugin -->
+		<script src="{% static 'upload/js/jquery.fileupload-image.js' %}"></script>
+		<!-- The File Upload audio preview plugin -->
+		<script src="{% static 'upload/js/jquery.fileupload-audio.js' %}"></script>
+		<!-- The File Upload video preview plugin -->
+		<script src="{% static 'upload/js/jquery.fileupload-video.js' %}"></script>
+		<!-- The File Upload validation plugin -->
+		<script src="{% static 'upload/js/jquery.fileupload-validate.js' %}"></script>
+		<!-- The File Upload Angular JS module -->
+		<script src="{% static 'upload/js/jquery.fileupload-angular.js' %}"></script>
+		<!-- The main application script -->
+		<script src="{% static 'upload/js/app.js' %}"></script>
+		<script src="{% static 'upload/js/csrf.js' %}"></script>
+	<script type="text/javascript">
+		document.getElementById("myButton").onclick = function () {
+			location.href = "/upload/angular/";
+		};
+	</script>
+    <!-- GLOBAL SCRIPTS -->
+
+    <script>
+		$("input[type='image']").click(function() {
+			$("input[id='my_file']").click();
+		});
+	</script>
+
+
+    <script src="{% static 'playmusic3/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'playmusic3/js/plugins/popupoverlay/jquery.popupoverlay.js' %}"></script>
+    <script src="{% static 'playmusic3/js/plugins/popupoverlay/defaults.js' %}"></script>
+    <!-- Logout Notification Box -->
+    <div id="logout">
+        <div class="logout-message">
+            <img class="img-circle img-logout" src="{% static 'playmusic3/img/profile-pic.jpg' %}" alt="">
+            <h3>
+                <i class="fa fa-sign-out text-green"></i> Ready to go?
+            </h3>
+            <p>Select "Logout" below if you are ready<br> to end your current session.</p>
+            <ul class="list-inline">
+                <li>
+                    <a href="/playmusic/logout/" class="btn btn-green">
+                        <strong>Logout</strong>
+                    </a>
+                </li>
+                <li>
+                    <button class="logout_close btn btn-green">Cancel</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /#logout -->
+    <!-- Logout Notification jQuery -->
+    <script src="{% static 'playmusic3/js/plugins/popupoverlay/logout.js' %}"></script>
+
+
+    <!-- THEME SCRIPTS -->
+    <script src="{% static 'playmusic3/js/flex.js' %}"></script>
+    <script src="{% static 'playmusic3/js/demo/dashboard-demo.js' %}"></script>
+
+</body>
+
+</html>

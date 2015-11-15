@@ -1,0 +1,99 @@
+{% load staticfiles %}
+{% load playmusictags %}
+<script src="{% static 'playmusic3/js/jquery.min.js' %}"></script>
+<script src="{% static 'playmusic/js/myjqueryfunc.js' %}"></script>
+<br><br>
+<div class="resultbox">
+	<div class="row">
+		<div class="col-md-2">
+			<h4 style="color:grey">{{ no_of_results }} results</h4>
+		</div>
+		<div class="col-md-5 col-md-offset-5">
+			<span class="searchnavactive" id="searchbysong">Songs</span>
+			<span class="searchnav" id="searchbuttonbyartist">Artist</span>
+			<span class="searchnav" id="searchbuttonbyalbum">Album</span>
+			<span class="searchnav" id="searchbuttonbygenre">Genre</span>
+		</div>
+
+	</div>
+	<hr><br>
+	{% for item in results %}
+		<div class="resultedsongs">
+				<div class="row">
+					<div class="col-md-1">
+						<img class="searchimage" id="play{{item.id}}" data-catid="{{item.id}}" data-title="{{item.file.url}}" src="{% static 'playmusic/img/tcdimage.jpg' %}" alt="Playhere image" height=60 width=65>
+					</div>
+					<div class="col-md-7">
+						<h4 class="songname">{{ item.file.name|replacetag:"_"|slice:"6:" }}</a><br><small>{{ item.song.artist }}</small><br><small>{{ item.song.album }}</small></h4>
+					</div>
+					<div class="col-md-2">
+						<span>
+							<div class="btn-group">
+								<button type="button" class="btn btn-white"><i class="fa fa-circle-o-notch"></i></button>
+								<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+								  <li class="queuejquery" id="queue{{item.id}}" data-catid="{{item.id}}"><i class="fa fa-angle-double-right"></i> Add to Queue</li>
+									<li class="playlisttab" id="addtoplaylist{{item.id}}" data-catid="{{item.id}}"><i class="fa fa-hand-o-down"></i> Add to myplaylist</li>
+									<li class="favtab" id="addtofav{{item.id}}" data-catid="{{item.id}}"><i class="fa fa-star"></i> Add to Favriotes</li>
+									<li class="divider"></li>
+									<li class="recommendtab" data-toggle="modal" data-target="#myModal" data-catid="{{item.id}}"><i class="fa fa-paper-plane"></i> Recommend to a friend</a></li>
+								</ul>
+							</div>
+						</span>
+					</div>
+					<div class="col-md-2">
+						<div class="tagbox">
+							#{{ item.song.tag }}
+						</div>
+					</div>
+				</div>
+		</div>
+		<hr>
+
+	{% endfor %}
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Recommend to a Friend</h4>
+		</div>
+		<div class="modal-body">
+			<h4>Enter the name or email or username of your freind !</h4><br>
+			<div class="row">
+				<div class="col-md-10">
+						<div class="input-group">
+							<div class="ui-widget">
+								<input type="text" class="form-control" id="usersearch" placeholder="Search your friend by name,email or username">
+							</div>
+							<span class="input-group-btn">
+								<button class="btn btn-default" id="usersearchbutton"><i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+				 </div>
+			</div>
+			 <br>
+			 <div class="row">
+				 <div class="col-md-4">
+						<div id="userresult">
+
+						</div>
+					</div>
+			 </div>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+
+	</div>
+
+</div>
+</div>
